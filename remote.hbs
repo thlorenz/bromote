@@ -1,0 +1,11 @@
+'use strict';
+
+module.exports = function (cb) { 
+require('{{ exportRemotePath }}')({
+    url :  '{{ url }}',
+  {{#if deps}}
+    deps : { {{#each deps}} {{ this.key }}: '{{ this.global }}', {{/each}} },
+  {{/if}}
+    exports :  '{{ exports }}'
+  }, cb);
+};
