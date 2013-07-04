@@ -20,7 +20,7 @@
     "scriptjs": "~2.4.0",
     "xtend": "~2.0.6",
     "handlebars": "~1.0.12",
-    "runnel": "~0.3.2"
+    "runnel": "~0.4.1"
   },
   "devDependencies": {
     "nave": "~0.4.3",
