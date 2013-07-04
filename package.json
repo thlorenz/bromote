@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Tool to setup and require remote scripts with browserify.",
   "main": "index.js",
+  "browser": "./files",
   "scripts": {
     "test-main": "tap test/*.js",
     "test-0.8": "nave use 0.8 npm run test-main",
