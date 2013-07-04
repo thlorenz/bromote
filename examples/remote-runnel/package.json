@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git://github.com/thlorenz/bromote.git"
   },
-  "homepage": "https://github.com/thlorenz/tree/master/examples/remote-runnel",
+  "homepage": "https://github.com/thlorenz/bromote/tree/master/examples/remote-runnel",
   "dependencies": {
     "browserify": "~2.16.0"
   },
