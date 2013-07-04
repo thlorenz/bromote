@@ -1,0 +1,33 @@
+{
+  "name": "remote-runnel",
+  "version": "0.0.0",
+  "description": "An example showing how a runnel script is pulled in remotely.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thlorenz/bromote.git"
+  },
+  "homepage": "https://github.com/thlorenz/tree/master/examples/remote-runnel",
+  "dependencies": {
+    "browserify": "~2.16.0"
+  },
+  "devDependencies": {
+    "nave": "~0.4.3",
+    "tape": "~1.0.4",
+    "tap": "~0.4.3"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Thorsten Lorenz",
+    "email": "thlorenz@gmx.de",
+    "url": "http://thlorenz.com"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "git://github.com/thlorenz/bromote/blob/master/LICENSE"
+  },
+  "engine": {
+    "node": ">=0.6"
+  }
+}
