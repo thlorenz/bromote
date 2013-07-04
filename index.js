@@ -1,9 +1,10 @@
 'use strict';
 
-var cleanLoaders =  require('./lib/clean-loaders');
-var genRemote    =  require('./lib/gen-remote');
 var xtend        =  require('xtend');
 var runnel       =  require('runnel');
+var cleanLoaders =  require('./lib/clean-loaders');
+var genRemote    =  require('./lib/gen-remote');
+var genIndex     =  require('./lib/gen-index'); 
 
 module.exports = function addRemoteScripts(remote, cb) {
 
@@ -28,13 +29,14 @@ module.exports = function addRemoteScripts(remote, cb) {
             cb();
           });
         };
-
-      });
-
-    tasks.push(function (err) {
-      if (err) return cb(err);
-      cb(null, gens);
-    });
+      })
+      .concat(genIndex.bind(null, gens))
+      .concat(
+        function (err) {
+          if (err) return cb(err);
+          cb(null, gens);
+        }
+      );
 
     runnel(tasks);
   });
