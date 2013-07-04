@@ -1,6 +1,6 @@
 'use strict';
 
-var genRemote =  require('./gen-remote');
+var genRemote =  require('./lib/gen-remote');
 var xtend     =  require('xtend');
 var runnel    =  require('runnel');
 
