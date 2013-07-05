@@ -1,7 +1,7 @@
 'use strict';
 
 var browserify  =  require('browserify');
-var bromote     =  require('../..');
+var bromote     =  require('bromote');
 var PassThrough =  require('stream').PassThrough;
 
 var fs          =  require('fs');
@@ -20,7 +20,6 @@ function build (debug) {
 
   bromote(remote, function (err, gens) {
     if (err) return console.error(err);
-    console.error('gens: ', gens);
     
     gens.forEach(function (gen) { bify.add(gen); });
 
