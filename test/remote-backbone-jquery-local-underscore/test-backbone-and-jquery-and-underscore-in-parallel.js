@@ -4,7 +4,7 @@
 var test = require('tape')
 var bromote = require('../..')
 
-test('\nremote backbone, and jquery and local underscore in parallel', function (t) {
+test('remote backbone, and jquery and local underscore in parallel', function (t) {
   t.plan(4)
   var $, backbone;
 
