@@ -5,10 +5,11 @@ var fs     =  require('fs')
   , path   =  require('path')
   , opener =  require('opener')
 
-module.exports = function (root, build) {
+module.exports = function (root) {
 
   var bundle =  path.join(root, 'bundle.js')
     , index  =  path.join(root, 'index.html')
+    , build  =  require(path.join(root, 'build'))
 
   build(true, function (err, bundled) {
     if (err) return console.error(err);
