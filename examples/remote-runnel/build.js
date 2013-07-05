@@ -13,7 +13,7 @@ var remote = {
       url: 'https://raw.github.com/thlorenz/runnel/master/index.js' } 
 };
 
-function build (debug) {
+var build = module.exports = function (debug) {
 
   var passThrough = new PassThrough();
   var bify = browserify();
@@ -30,7 +30,9 @@ function build (debug) {
   });
 
   return passThrough;
-}
+};
+
+if (module.parent) return;
 
 var bundlePath = path.join(__dirname, 'bundle.js');
 build(true).pipe(fs.createWriteStream(bundlePath, 'utf8'));
