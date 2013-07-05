@@ -7,12 +7,14 @@ var runnel = require('runnel');
 
 function test(file, cb) {
   var p = require.resolve('./' + file);
+  var title = 'jquery and backbone remote ' + file.replace(/-/g, ' ');
+  console.log('  - ', title);
   run(
       __dirname
     , { build  :  build.bind(null, p)
       , html   :  path.basename(file) + '.html'
       , bundle :  path.basename(file) + '.bundle.js'
-      , title  :  file.replace(/-/g, ' ')
+      , title  :  title 
       }
     , cb
   );
