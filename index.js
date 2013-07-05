@@ -12,7 +12,7 @@ var genIndex     =  require('./lib/gen-index');
  *
  * @name exports
  * @function
- * @param bify {Object} browserify instance (optional)
+ * @param bify {Object} browserify instance (optional) but recommended
  * @param remote {Object} hashtable containing information about remote scripts for which to generate and add loaders
  * @param cb {Function} called back with paths to generated loaders
  */
