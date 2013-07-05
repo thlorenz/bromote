@@ -5,7 +5,6 @@ var fs     =  require('fs')
   , path   =  require('path')
   , opener =  require('opener')
 
-
 function html(bundle, title) {
   return [
     '<!DOCTYPE html>'
@@ -27,16 +26,21 @@ module.exports = function (root, opts, cb) {
   cb = cb || function () {}
 
   var bundle =  path.join(root, opts.bundle || 'bundle.js')
-    , index  =  path.join(root, opts.html || 'index.html')
+    , index  =  path.join(root, opts.html   || 'index.html')
+    , title  =  opts.title || opts.html     || 'bromote test'
     , build  =  opts.build || require(path.join(root, 'build'))
-    , title  =  opts.title || opts.html || 'bromote test'
     ;
 
   build(true)
     .on('error', console.error)
     .on('end', function () {
       fs.writeFileSync(index, html(opts.bundle || 'bundle.js', title), 'utf8');
-      opener(index, cb)
+
+      // passing cb directly to opener doesn't work for whatever reason
+      opener(index, function (err) {
+        if (err) console.error(err);
+        cb();
+      });
     })
     .pipe(fs.createWriteStream(bundle, 'utf8'));
 };
