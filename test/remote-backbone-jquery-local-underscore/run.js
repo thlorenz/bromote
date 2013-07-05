@@ -19,10 +19,9 @@ function test(file, cb) {
   );
 }
 
-test('test-backbone-and-jquery-and-underscore-in-parallel');
 
-/*test('test-backbone-then-jquery-and-underscore', function () {
+test('test-backbone-then-jquery-and-underscore', function () {
   test('test-backbone-then-jquery-then-underscore', function () {
     test('test-backbone-and-jquery-and-underscore-in-parallel');
   });
-});*/
+});
