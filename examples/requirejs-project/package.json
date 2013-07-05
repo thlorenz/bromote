@@ -12,7 +12,8 @@
   "dependencies": {
     "browserify": "~2.16.0",
     "bconfig": "~0.1.1",
-    "browserify-shim": "~2.0.5"
+    "browserify-shim": "~2.0.5",
+    "bromote": "*"
   },
   "devDependencies": {
     "nave": "~0.4.3",
