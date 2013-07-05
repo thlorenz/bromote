@@ -25,7 +25,9 @@
   "devDependencies": {
     "nave": "~0.4.3",
     "tape": "~1.0.4",
-    "tap": "~0.4.3"
+    "tap": "~0.4.3",
+    "opener": "~1.3.0",
+    "browserify": "~2.16.0"
   },
   "keywords": [
     "browserify",
