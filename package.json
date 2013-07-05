@@ -1,6 +1,6 @@
 {
   "name": "bromote",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tool to setup and require remote scripts with browserify.",
   "main": "index.js",
   "browser": "./loaders",
