@@ -19,7 +19,6 @@ function build (debug) {
 
   bromote(config.remote, function (err, gens) {
     if (err) return console.error(err);
-    console.error('gens: ', gens);
     
     gens.forEach(function (gen) { bify.add(gen); });
 
