@@ -2,40 +2,40 @@
 
 Tool to setup and require remote scripts with browserify.
 
-```js
-var config = { 
-  remote:
-   { jquery:
-      { exports: '$',
-        url: 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' },
-     backbone:
-      { deps: { jquery: '$', underscore: '_' },
-        exports: 'Backbone',
-        url: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js' },
-     underscore: 
-       { exports: '_',
-         url: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js' } }
-};
-```
-
-**build:**
+### Server Side
 
 ```js
+var browserify  =  require('browserify');
+var bromote     =  require('bromote');
+var PassThrough =  require('stream').PassThrough;
+
+var remote =
+  { jquery:
+    { exports: '$',
+      url: 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' },
+    backbone:
+    { deps: { jquery: '$', underscore: '_' },
+      exports: 'Backbone',
+      url: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js' },
+    underscore: 
+      { exports: '_',
+        url: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js' } };
+
 var passThrough = new PassThrough();
-
 var bify = browserify();
-bromote(bify, config.remote, function (err, gens) {
+
+bromote(bify, remote, function (err) {
   if (err) return console.error(err);
   
   bify
-    .add(entry, { entry: true })
-    .bundle({ debug: debug })
+    .add('./main.js', { entry: true })
+    .bundle()
     .pipe(passThrough);
 });
 return passThrough;
 ```
 
-**client side:**
+### Client Side
 
 ```js
 bromote.backbone(function (backbone) {
@@ -81,7 +81,7 @@ forced to load scripts from urls for whatever reason that is out of their contro
 
 ## API
 
-### Server side ***bromote(bify, remote, cb)***
+### Server side: ***bromote(bify, remote, cb)***
 ```
 /**
  * Generates all remote loaders and adds them to browserify instance if it is given.
@@ -95,7 +95,7 @@ forced to load scripts from urls for whatever reason that is out of their contro
  */
 ```
 
-### Client side ***bromote.foo(function (foo) { ... })***
+### Client side: ***bromote.foo(function (foo) { ... })***
 
 Assuming that `foo` was included as a remote server side, this will resolve it from the remote url and call back with
 its export once it is loaded.
