@@ -2,6 +2,7 @@
 
 var browserify  =  require('browserify');
 var bromote     =  require('../..');
+var PassThrough =  require('stream').PassThrough;
 
 var remote = {
   runnel:
@@ -9,8 +10,9 @@ var remote = {
       url: 'https://raw.github.com/thlorenz/runnel/master/index.js' } 
 };
 
-var build = module.exports = function (debug, cb) {
+var build = module.exports = function (debug) {
 
+  var passThrough = new PassThrough();
   var bify = browserify();
 
   bromote(remote, function (err, gens) {
@@ -20,6 +22,9 @@ var build = module.exports = function (debug, cb) {
 
     bify
       .add(require.resolve('./test'), { entry: true })
-      .bundle({ debug: debug }, cb);
+      .bundle({ debug: debug })
+      .pipe(passThrough);
   });
+
+  return passThrough;
 };

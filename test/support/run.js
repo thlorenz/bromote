@@ -11,11 +11,11 @@ module.exports = function (root) {
     , index  =  path.join(root, 'index.html')
     , build  =  require(path.join(root, 'build'))
 
-  build(true, function (err, bundled) {
-    if (err) return console.error(err);
-
-    fs.writeFileSync(bundle, bundled, 'utf8');
-    fs.writeFileSync(index, '<script src="bundle.js"></script>', 'utf8');
-    opener(index)
-  });
+  build(true)
+    .on('error', console.error)
+    .on('end', function () {
+      fs.writeFileSync(index, '<script src="bundle.js"></script>', 'utf8');
+      opener(index)
+    })
+    .pipe(fs.createWriteStream(bundle, 'utf8'));
 };
