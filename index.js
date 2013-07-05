@@ -6,7 +6,23 @@ var cleanLoaders =  require('./lib/clean-loaders');
 var genRemote    =  require('./lib/gen-remote');
 var genIndex     =  require('./lib/gen-index'); 
 
-module.exports = function addRemoteScripts(remote, cb) {
+/**
+ * Generates all remote loaders and adds them to browserify instance if it is given.
+ * Calls back with paths to generated loaders.
+ *
+ * @name exports
+ * @function
+ * @param bify {Object} browserify instance (optional)
+ * @param remote {Object} hashtable containing information about remote scripts for which to generate and add loaders
+ * @param cb {Function} called back with paths to generated loaders
+ */
+module.exports = function addRemoteScripts(bify, remote, cb) {
+
+  if (typeof remote == 'function') {
+    cb = remote;
+    remote = bify;
+    bify = null;
+  }
 
   cleanLoaders(function (err) {
     if (err) return cb(err);  
@@ -34,6 +50,8 @@ module.exports = function addRemoteScripts(remote, cb) {
       .concat(
         function (err) {
           if (err) return cb(err);
+          if (bify) gens.forEach(function (gen) { bify.add(gen); });
+
           cb(null, gens);
         }
       );

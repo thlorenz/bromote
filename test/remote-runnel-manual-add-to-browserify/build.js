@@ -1,11 +1,8 @@
 'use strict';
 
 var browserify  =  require('browserify');
-var bromote     =  require('bromote');
+var bromote     =  require('../..');
 var PassThrough =  require('stream').PassThrough;
-
-var fs          =  require('fs');
-var path        =  require('path');
 
 var remote = {
   runnel:
@@ -18,19 +15,17 @@ var build = module.exports = function (debug) {
   var passThrough = new PassThrough();
   var bify = browserify();
 
-  bromote(bify, remote, function (err, gens) {
+  bromote(remote, function (err, gens) {
     if (err) return console.error(err);
+    
+    // not passing bify, but adding generated loaders manually instead
+    gens.forEach(function (gen) { bify.add(gen); });
 
     bify
-      .add(require.resolve('./main'), { entry: true })
+      .add(require.resolve('./test'), { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });
 
   return passThrough;
 };
-
-if (module.parent) return;
-
-var bundlePath = path.join(__dirname, 'bundle.js');
-build(true).pipe(fs.createWriteStream(bundlePath, 'utf8'));

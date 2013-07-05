@@ -17,10 +17,8 @@ function build (debug) {
   // no browserify-shim needed since no third party modules are pulled in from a vendor/file 
   var bify = browserify();
 
-  bromote(config.remote, function (err, gens) {
+  bromote(bify, config.remote, function (err, gens) {
     if (err) return console.error(err);
-    
-    gens.forEach(function (gen) { bify.add(gen); });
 
     bify
       .add(config.entry, { entry: true })

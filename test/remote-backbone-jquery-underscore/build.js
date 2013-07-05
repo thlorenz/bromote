@@ -2,7 +2,6 @@
 
 var browserify  =  require('browserify');
 var bromote     =  require('../..');
-var bconfig     =  require('bconfig');
 var PassThrough =  require('stream').PassThrough;
 
 var fs          =  require('fs');
@@ -26,12 +25,10 @@ module.exports = function build (entry, debug) {
 
   var passThrough = new PassThrough();
 
-  bromote(config.remote, function (err, gens) {
+  var bify = browserify();
+  bromote(bify, config.remote, function (err, gens) {
     if (err) return console.error(err);
     
-    var bify = browserify();
-    gens.forEach(function (gen) { bify.add(gen); });
-
     bify
       .add(entry, { entry: true })
       .bundle({ debug: debug })

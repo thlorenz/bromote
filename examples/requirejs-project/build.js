@@ -17,10 +17,8 @@ function build (debug) {
 
   var bify = shim(browserify(), config.shim);
 
-  bromote(config.remote, function (err, gens) {
+  bromote(bify, config.remote, function (err, gens) {
     if (err) return console.error(err);
-    
-    gens.forEach(function (gen) { bify.add(gen); });
 
     bify
       .add(config.entry, { entry: true })

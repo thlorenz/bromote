@@ -15,11 +15,9 @@ var build = module.exports = function (debug) {
   var passThrough = new PassThrough();
   var bify = browserify();
 
-  bromote(remote, function (err, gens) {
+  bromote(bify, remote, function (err, gens) {
     if (err) return console.error(err);
     
-    gens.forEach(function (gen) { bify.add(gen); });
-
     bify
       .add(require.resolve('./test'), { entry: true })
       .bundle({ debug: debug })
