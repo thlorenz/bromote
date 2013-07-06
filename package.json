@@ -16,7 +16,7 @@
     "scriptjs": "~2.4.0",
     "xtend": "~2.0.6",
     "handlebars": "~1.0.12",
-    "runnel": "~0.4.1"
+    "runnel": "~0.5.0"
   },
   "devDependencies": {
     "tape": "~1.0.4",

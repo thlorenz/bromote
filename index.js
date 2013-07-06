@@ -31,30 +31,28 @@ module.exports = function addRemoteScripts(bify, remote, cb) {
     var keys = Object.keys(remote); 
     if (!keys.length) return cb(null, []);
     
-    var gens = [];
+    var tasks = [ runnel.seed([]) ]
+      .concat(keys.map(
+        function (k) {
+          var rem = remote[k];
+          rem.key = k;
 
-    var tasks = keys 
-      .map(function (k) {
-        var rem = remote[k];
-        rem.key = k;
+          return function (acc, cb) { 
+            genRemote(rem, function (err, gen) {
+              if (err) return cb(err);
+              acc.push(gen);
+              cb(null, acc);
+            });
+          };
+        })
+      )
+      .concat(genIndex)
+      .concat(function done (err, acc) {
+        if (err) return cb(err);
+        if (bify) acc.forEach(bify.add.bind(bify));
 
-        return function (cb) { 
-          genRemote(rem, function (err, gen) {
-            if (err) return cb(err);
-            gens.push(gen);
-            cb();
-          });
-        };
-      })
-      .concat(genIndex.bind(null, gens))
-      .concat(
-        function (err) {
-          if (err) return cb(err);
-          if (bify) gens.forEach(function (gen) { bify.add(gen); });
-
-          cb(null, gens);
-        }
-      );
+        cb(null, acc);
+      });
 
     runnel(tasks);
   });
