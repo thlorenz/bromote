@@ -38,6 +38,8 @@ return passThrough;
 ### Client Side
 
 ```js
+var bromote = require('bromote');
+
 bromote.backbone(function (backbone) {
   console.log(backbone.$().jquery); // =>  '1.7.1'
 });
@@ -59,7 +61,7 @@ have a damn good reason to load scripts from a url**.
 You loose versioning and are opening your app up to lots of unknowns. **Bad things will happen!**
 
 If any of the scripts pulled in via a url has a bug, it could potentially crash your app. Since you are loading it
-dynamically, you have no control over when that could happen, i.e. it the script could change months after you deployed
+dynamically, you have no control over when that happens, i.e. the script could change months after you deployed
 your app.
 
 So in general **please don't do this**.
