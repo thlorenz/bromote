@@ -22,7 +22,7 @@ var build = module.exports = function (debug) {
     if (err) return console.error(err);
 
     bify
-      .add(require.resolve('./main'), { entry: true })
+      .require(require.resolve('./main'), { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });

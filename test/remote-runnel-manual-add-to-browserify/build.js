@@ -22,7 +22,7 @@ var build = module.exports = function (debug) {
     gens.forEach(function (gen) { bify.add(gen); });
 
     bify
-      .add(require.resolve('./test'), { entry: true })
+      .require(require.resolve('./test'), { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });

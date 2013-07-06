@@ -21,7 +21,7 @@ module.exports = function build (debug) {
     if (err) return console.error(err);
     
     bify
-      .add(config.entry, { entry: true })
+      .require(config.entry, { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });

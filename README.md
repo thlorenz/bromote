@@ -28,7 +28,7 @@ bromote(bify, remote, function (err) {
   if (err) return console.error(err);
   
   bify
-    .add('./main.js', { entry: true })
+    .require('./main.js', { entry: true })
     .bundle()
     .pipe(passThrough);
 });

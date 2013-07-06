@@ -30,7 +30,7 @@ module.exports = function build (entry, debug) {
     if (err) return console.error(err);
     
     bify
-      .add(entry, { entry: true })
+      .require(entry, { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });
