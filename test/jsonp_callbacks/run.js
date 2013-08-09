@@ -24,7 +24,7 @@ var go = module.exports = function (cb) {
   console.log('running ', __filename);
 
   runnel(
-      test.bind(null, 'test-escaped-characters')
+      test.bind(null, 'test-jsonp-callbacks')
     , cb
   );
 };
