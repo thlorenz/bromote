@@ -53,6 +53,20 @@ Example derived from [this test](https://github.com/thlorenz/bromote/tree/master
 
 For more examples see [examples](https://github.com/thlorenz/bromote/tree/master/examples) and [tests](https://github.com/thlorenz/bromote/tree/master/test).
 
+## JSONP support 
+
+Providing a url causes bromote to generate a JSONP callback function and wait for it to be invoked instead of calling
+back when the script is loaded.
+
+```js
+var remote = 
+  { jsonpfn: { 
+        exports: 'jsonpfn'
+      , url: 'http://url/to/jsonp-provider?callback=?' 
+    }
+  };
+```
+
 ## Disclaimer
 
 Since you are already using browserify and thus can pull in modules via npm in a version controlled manner, **you better
@@ -65,6 +79,9 @@ dynamically, you have no control over when that happens, i.e. the script could c
 your app.
 
 So in general **please don't do this**.
+
+However if you pull in a very large and trusted library like jquery and want to do this via a cdn which hosts specific
+versions of it, it may be advisable to do so via a script tab or bromote
 
 ## Why bromote then?
 
