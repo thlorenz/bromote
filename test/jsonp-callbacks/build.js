@@ -10,26 +10,26 @@ var path        =  require('path');
 // That API_KEY only works from localhost & 127.0.0.1, so like, don't be a jerk
 // and get your own
 
-var config = {
-  remote:
-   { jsonpTest:
-      { exports: 'jsonpTest',
-        url: 'jsonp-harness.js?callback=?' }
-    }
+var remote = { 
+  jsonpTest: { 
+      exports: 'jsonpTest'
+    , url: 'jsonp-harness.js?callback=?' 
+  }
 };
 
-module.exports = function build (entry, debug) {
+var build = module.exports = function (debug) {
 
   var passThrough = new PassThrough();
-
   var bify = browserify();
-  bromote(bify, config.remote, function (err, gens) {
-    if (err) return console.error(err);
 
+  bromote(bify, remote, function (err, gens) {
+    if (err) return console.error(err);
+    
     bify
-      .require(entry, { entry: true })
+      .require(require.resolve('./test'), { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });
+
   return passThrough;
 };

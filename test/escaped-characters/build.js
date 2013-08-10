@@ -18,7 +18,7 @@ var config = {
     }
 };
 
-module.exports = function build (entry, debug) {
+module.exports = function build (debug) {
 
   var passThrough = new PassThrough();
 
@@ -27,7 +27,7 @@ module.exports = function build (entry, debug) {
     if (err) return console.error(err);
 
     bify
-      .require(entry, { entry: true })
+      .require(require.resolve('./test'), { entry: true })
       .bundle({ debug: debug })
       .pipe(passThrough);
   });
