@@ -2,7 +2,8 @@
 
 require('runnel')(
     require('./remote-backbone-jquery-local-underscore-requirejs/run')
-  , require('./escaped_characters/run')
+  , require('./jsonp-callbacks/run')
+  , require('./escaped-characters/run')
   , require('./remote-backbone-jquery-local-underscore/run')
   , require('./remote-backbone-jquery-underscore/run')
   , require('./remote-runnel/run')

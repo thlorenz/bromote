@@ -7,7 +7,7 @@ var runnel = require('runnel');
 
 function test(file, cb) {
   var p = require.resolve('./' + file);
-  var title = 'all remote ' + file.replace(/-/g, ' ');
+  var title = file.replace(/-/g, ' ');
   console.log('  - ', title);
   run(
       __dirname
@@ -24,7 +24,7 @@ var go = module.exports = function (cb) {
   console.log('running ', __filename);
 
   runnel(
-      test.bind(null, 'test-jsonp-callbacks')
+      test.bind(null, 'test-escaped-characters')
     , cb
   );
 };
